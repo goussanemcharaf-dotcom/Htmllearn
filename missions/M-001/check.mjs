@@ -30,10 +30,13 @@ check(1, 'evidence.md: a DNS answer (an IP address)', /\b(?:\d{1,3}\.){3}\d{1,3}
 check(1, 'evidence.md: TLS or certificate details',
   /certificat|issuer|subject|issued|\bTLS\b|\bSSL\b|schannel/i.test(evidence),
   'Paste the TLS lines from curl -v, or the certificate details from the browser padlock.');
-check(1, 'evidence.md: an HTTP status code', /HTTP\/[\d.]+\s+\d{3}|status code:?\s*\d{3}/i.test(evidence),
-  'Paste the status line, e.g. "HTTP/1.1 200 OK", or "Status Code: 200" from DevTools.');
-check(1, 'evidence.md: a TTFB time ("Waiting for server response")', /(?:TTFB|waiting)[^\n]*\d/i.test(evidence),
-  'DevTools Network panel: click the request, open Timing, copy "Waiting for server response".');
+// DevTools follows the browser's language, so accept French labels as well as English ones.
+check(1, 'evidence.md: an HTTP status code',
+  /HTTP\/[\d.]+\s+\d{3}|(?:status code|code d['’]\s*état)\s*:?\s*\d{3}/i.test(evidence),
+  'Paste the status line, e.g. "HTTP/1.1 200 OK", or "Status Code: 200" (Code d\'état) from DevTools.');
+check(1, 'evidence.md: a TTFB time ("Waiting for server response")',
+  /(?:TTFB|waiting|attente|réponse du serveur)[^\n]*\d/i.test(evidence),
+  'DevTools Network panel: click the request, open Timing, copy "Waiting for server response" (Attente de la réponse du serveur).');
 
 // Part 2: your first page
 const raw = read('index.html');

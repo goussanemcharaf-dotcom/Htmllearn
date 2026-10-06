@@ -8,6 +8,7 @@
 - Workspace: split (hands-on work on own computer; mentor in the Claude app, in the cloud) · OS: Windows · editor: none chosen yet (VS Code suggested in M-001 Part 2) · Node: unknown · Git: unknown
 - Time zone: not asked yet (use UTC until known)
 - Explanation language: English
+- Tool language: Windows shows French (nslookup printed "Serveur", "Réponse ne faisant pas autorité"); the browser and DevTools are probably French too (ASSUMPTION, confirm at step 3)
 - Style: examples-first (default) · challenge: standard (default; adapts automatically) · game layer: on as a trial (answered "don't know"), revisit at the first /retro
 - Interests (project themes): not asked yet
 - Constraints (device, connection, budget, accessibility): not asked yet (ask at the first deploy, or if something seems hard)

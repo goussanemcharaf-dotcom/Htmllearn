@@ -10,19 +10,42 @@
     "step": 1,
     "status": "in-progress",
     "spine_version": 0,
-    "pending_prediction": {
-      "step": 1,
-      "said": "nslookup example.com returns one IP address, shaped like 10.80.40.50",
-      "confidence": 5
-    },
+    "resolved_predictions": [
+      {
+        "step": 1,
+        "said": "nslookup returns one IP address, shaped like 10.80.40.50",
+        "confidence": 5,
+        "result": "youtube.com returned 5 addresses: 4 IPv4 (the predicted shape) + 1 IPv6",
+        "verdict": "wrong on the count, right on the IPv4 shape"
+      }
+    ],
     "notes": [
       "OBSERVATION (pre-test): knows the browser asks a DNS server for the site's IP. The connection, TLS, the HTTP request and response, and rendering aren't mentioned yet; the step after 'reaching the site' is a black box.",
-      "OBSERVATION (step 1 prediction): the made-up IP 10.80.40.50 is in a private range (10.0.0.0/8). Use it later as a hook for private vs public addresses."
+      "OBSERVATION (step 1 prediction): the made-up IP 10.80.40.50 is in a private range (10.0.0.0/8). Use it later as a hook for private vs public addresses.",
+      "OBSERVATION (step 1 run): ran nslookup without help, but on youtube.com instead of example.com. Still to cover: the DNS server line (192.168.42.205, a private address on their own network, name UnKnown) and 'Réponse ne faisant pas autorité'. They still need an example.com lookup so the DNS evidence matches step 2's connection."
     ]
   },
-  "competencies": {},
-  "reliance": { "recent_rungs": [], "index": null, "ownership_checks": { "passed": 0, "failed": 0 } },
-  "calibration": { "rated": 1, "confident_and_wrong": 0 },
+  "competencies": {
+    "http.dns": {
+      "level": 1,
+      "confidence": "medium",
+      "class": "critical",
+      "evidence": [
+        {
+          "date": "2026-10-06",
+          "type": "awareness",
+          "ref": "missions/M-001/before.md; missions/M-001/evidence.md (step 1)",
+          "rung": 0,
+          "note": "Pre-test names DNS as the name-to-IP lookup. Ran nslookup unaided (on youtube.com). Predicted 1 address at confidence 5; got 4 IPv4 + 1 IPv6."
+        }
+      ],
+      "weaknesses": ["HYPOTHESIS: believes one name = one address (one server); being probed in step 1"],
+      "last_practiced": "2026-10-06",
+      "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
+    }
+  },
+  "reliance": { "recent_rungs": [0], "index": 0, "ownership_checks": { "passed": 0, "failed": 0 } },
+  "calibration": { "rated": 1, "confident_and_wrong": 1 },
   "learning_debt": [],
   "blind_spot_backlog": [],
   "missions": { "completed": [], "unfinished": ["M-001"] },
