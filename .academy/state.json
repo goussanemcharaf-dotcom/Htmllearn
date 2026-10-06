@@ -47,10 +47,29 @@
       "OBSERVATION (step 2 investigate): identified MAD = Madrid (R0) but didn't link it to who answered. Replies are short (possible fatigue), so taught the CDN idea as a worked example: Cloudflare edge in Madrid, cache HIT, Age, addresses answered by the nearest data center. CDN understanding is NOT evidenced yet; check it in the step 5 drawing.",
       "NEXT: offer a break before step 3 (session over 1 h). Step 3 = browser DevTools Network (French labels: Réseau, En-têtes; Timing tab probably 'Minutage') + padlock certificate.",
       "OBSERVATION (2026-10-06, before step 3): learner chose to continue. example.com's HTML loads /s.js (2 requests: document + script; the icon is data:, so no favicon request). s.js inserts ar/zh/fr/ru/es paragraphs, picks the one matching navigator.languages (a callback to their 'navigator' word) and moves it to the top, plus an inline SVG. So view-source has 1 paragraph but the DOM has 6. That's step 4's source-vs-DOM lesson. Step 3 prediction: how many requests (truth: 2).",
-      "OBSERVATION (step 3 attempt): skipped the prediction and answered '7 requests because there are 7 different durations' after opening the Timing tab. No confidence given, so no calibration entry. Still missing: the request list names, the status code and the TTFB value. Asked R1: what do the duration names remind you of?"
+      "OBSERVATION (step 3 attempt): skipped the prediction and answered '7 requests because there are 7 different durations' after opening the Timing tab. No confidence given, so no calibration entry. Still missing: the request list names, the status code and the TTFB value. Asked R1: what do the duration names remind you of?",
+      "OBSERVATION (step 3 screenshot): 7 requests. Only example.com (document) and s.js come from the page's HTML. content.css, floating-find-similar.css and selection-toolbar.css are fetched by content.js / floating-find-similar.js / selection-toolbar.js, and the data: font and data: svg aren't in example.com's HTML either. HYPOTHESIS: a browser extension. Experiment set: a private window (Ctrl+Shift+N, extensions usually off); predict the count (expected 2) and read the TTFB from the Timing tab.",
+      "Mentor error logged: misread 'Durée' as Timing-tab stages. Removed the R5 from the reliance record (recent_rungs now ends with rung 0 for the unaided count)."
     ]
   },
   "competencies": {
+    "browser.devtools-network": {
+      "level": 1,
+      "confidence": "medium",
+      "class": "critical",
+      "evidence": [
+        {
+          "date": "2026-10-06",
+          "type": "awareness",
+          "ref": "missions/M-001/step3-network-panel.png; missions/M-001/evidence.md (step 3)",
+          "rung": 0,
+          "note": "Opened DevTools (French UI), used Réseau with a hard reload, and counted the requests correctly (7) by reading the list. Not yet: initiators, the Timing tab, or explaining what they see."
+        }
+      ],
+      "weaknesses": ["Hasn't used the Initiateur column or the Timing tab yet (step 3 experiment)."],
+      "last_practiced": "2026-10-06",
+      "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
+    },
     "http.request-lifecycle": {
       "level": 1,
       "confidence": "medium",
@@ -66,7 +85,7 @@
       ],
       "weaknesses": [
         "Not yet explained the request/response chain in their own words (steps 5 and 11).",
-        "MISCONCEPTION (step 3): read the Timing tab's 7 durations as 7 separate requests; they're the stages of ONE request. R1 didn't land ('don't know, explain me'), so explained at R5 by mapping each stage to steps 1-2. Ownership check pending: count the rows in the request list (truth: 2, example.com + s.js)."
+        "CORRECTION (step 3): there was no misconception. The learner counted 7 rows by their Durée column, which was correct. The mentor misread it as Timing-tab stages and asked a confusing R1, which caused the 'don't know'. The timing-stages explanation was still taught; it's useful for the Timing tab."
       ],
       "last_practiced": "2026-10-06",
       "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
@@ -117,7 +136,7 @@
       "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
     }
   },
-  "reliance": { "recent_rungs": [0, 1, 0, 0, 0, 5], "index": 1.0, "ownership_checks": { "passed": 0, "failed": 0 } },
+  "reliance": { "recent_rungs": [0, 1, 0, 0, 0, 0], "index": 0.17, "ownership_checks": { "passed": 0, "failed": 0 } },
   "calibration": { "rated": 3, "confident_and_wrong": 1 },
   "learning_debt": [],
   "blind_spot_backlog": [
@@ -134,6 +153,13 @@
       "class": "awareness",
       "trigger": "M-001 step 1: 64:ff9b::67e0:b6f5 for exemple.com",
       "status": "open (teased in chat; revisit in W02 networking)"
+    },
+    {
+      "id": "BS-003",
+      "topic": "Browser extensions inject their own requests into every page (and can read the pages you visit), so measure in a clean or private window",
+      "class": "important",
+      "trigger": "M-001 step 3: 5 of 7 requests came from extension content scripts",
+      "status": "being explored inside M-001 step 3 (private-window experiment)"
     }
   ],
   "missions": { "completed": [], "unfinished": ["M-001"] },

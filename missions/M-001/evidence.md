@@ -80,3 +80,20 @@ C:\Users\user> curl.exe -v https://example.com -o NUL
 * Connection #0 to host example.com left intact
 PS C:\Users\user>
 ```
+
+## Step 3: HTTP in the browser
+
+Screenshot: `step3-network-panel.png` (DevTools, Réseau tab, after Ctrl+Shift+R).
+Transcribed by the mentor from that screenshot:
+
+| Nom | État | Type | Initiateur | Taille | Durée |
+|---|---|---|---|---|---|
+| example.com | 200 | document | Autre | 0,5 ko | 263 ms |
+| s.js | 200 | script | (index):1 | 1,6 ko | 110 ms |
+| content.css | 200 | fetch | content.js:1 | 21,0 ko | 3 ms |
+| floating-find-similar.css | 200 | fetch | floating-find-similar.js:1 | 23,0 ko | 4 ms |
+| selection-toolbar.css | 200 | fetch | selection-toolbar.js:1 | 23,9 ko | 4 ms |
+| data:font/woff2;bas… | 200 | font | (index) | 100 ko | 50 ms |
+| data:image/svg+xml,… | 200 | svg+xml | Autre | 23,9 ko | 6 ms |
+
+Footer: 7 requêtes · 194 ko transféré(s) · 195 ko ressources · Terminer : 785 ms · DOMContentLoaded : 460 ms · Chargement : 664 ms
