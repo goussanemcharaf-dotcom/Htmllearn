@@ -7,7 +7,7 @@
   "current": {
     "mission": "M-001",
     "part": 1,
-    "step": 2,
+    "step": 3,
     "status": "in-progress",
     "spine_version": 0,
     "resolved_predictions": [
@@ -44,7 +44,8 @@
       "OBSERVATION (step 1 done): example.com's two IPv4 addresses sit in different ranges (104.20.x, 172.66.x), unlike YouTube's neighbors. Step 2's 'server: cloudflare' header will show why (CDN): let them discover it.",
       "OBSERVATION (step 2): curl printed 'IPv6: (none)' although nslookup showed 2 IPv6 addresses. HYPOTHESIS: Windows' resolver drops IPv6 results because the PC has no IPv6 of its own (tethered IPv4 link; the carrier side does NAT64). nslookup asks the DNS server directly.",
       "OBSERVATION (step 2): Server: cloudflare, cf-cache-status: HIT, Age: 6260, CF-RAY ...-MAD, so Cloudflare's Madrid data center answered from its cache. Schannel printed no certificate details, so get the certificate from the padlock in step 3.",
-      "NEXT: the learner investigates CF-RAY's MAD (airport code → city → latency link), then step 3 in the browser (DevTools Network + padlock certificate)."
+      "OBSERVATION (step 2 investigate): identified MAD = Madrid (R0) but didn't link it to who answered. Replies are short (possible fatigue), so taught the CDN idea as a worked example: Cloudflare edge in Madrid, cache HIT, Age, addresses answered by the nearest data center. CDN understanding is NOT evidenced yet; check it in the step 5 drawing.",
+      "NEXT: offer a break before step 3 (session over 1 h). Step 3 = browser DevTools Network (French labels: Réseau, En-têtes; Timing tab probably 'Minutage') + padlock certificate."
     ]
   },
   "competencies": {
@@ -111,7 +112,7 @@
       "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
     }
   },
-  "reliance": { "recent_rungs": [0, 1, 0, 0], "index": 0.25, "ownership_checks": { "passed": 0, "failed": 0 } },
+  "reliance": { "recent_rungs": [0, 1, 0, 0, 0], "index": 0.2, "ownership_checks": { "passed": 0, "failed": 0 } },
   "calibration": { "rated": 3, "confident_and_wrong": 1 },
   "learning_debt": [],
   "blind_spot_backlog": [
