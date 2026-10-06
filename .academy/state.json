@@ -66,7 +66,7 @@
       ],
       "weaknesses": [
         "Not yet explained the request/response chain in their own words (steps 5 and 11).",
-        "MISCONCEPTION (step 3): read the Timing tab's 7 durations as 7 separate requests; they're the stages of ONE request. Being addressed with an R1 question: do the duration names match today's steps (DNS, connection, TLS...)?"
+        "MISCONCEPTION (step 3): read the Timing tab's 7 durations as 7 separate requests; they're the stages of ONE request. R1 didn't land ('don't know, explain me'), so explained at R5 by mapping each stage to steps 1-2. Ownership check pending: count the rows in the request list (truth: 2, example.com + s.js)."
       ],
       "last_practiced": "2026-10-06",
       "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
@@ -117,7 +117,7 @@
       "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
     }
   },
-  "reliance": { "recent_rungs": [0, 1, 0, 0, 0], "index": 0.2, "ownership_checks": { "passed": 0, "failed": 0 } },
+  "reliance": { "recent_rungs": [0, 1, 0, 0, 0, 5], "index": 1.0, "ownership_checks": { "passed": 0, "failed": 0 } },
   "calibration": { "rated": 3, "confident_and_wrong": 1 },
   "learning_debt": [],
   "blind_spot_backlog": [
