@@ -10,13 +10,15 @@
     "step": 2,
     "status": "in-progress",
     "spine_version": 0,
-    "pending_prediction": {
-      "step": 2,
-      "target": "curl.exe -v https://example.com",
-      "said": "connects to one of the four DNS addresses, over IPv4",
-      "confidence": 3
-    },
     "resolved_predictions": [
+      {
+        "step": 2,
+        "target": "curl.exe -v https://example.com",
+        "said": "connects to one of the four DNS addresses, over IPv4",
+        "confidence": 3,
+        "result": "Connected to example.com (104.20.23.154) port 443, IPv4",
+        "verdict": "fully correct; slightly under-confident at 3"
+      },
       {
         "step": 1,
         "target": "example.com",
@@ -39,12 +41,32 @@
       "OBSERVATION (step 1 run): ran nslookup without help, but on youtube.com instead of example.com. Still to cover: the DNS server line (192.168.42.205, a private address on their own network, name UnKnown) and 'Réponse ne faisant pas autorité'. They still need an example.com lookup so the DNS evidence matches step 2's connection.",
       "OBSERVATION (step 1 rerun): typed exemple.com (the French spelling), which is a different site. Checked 2026-10-06: IPv4-only (103.224.182.245), with an expired HTTPS certificate. Showed the typo-domain card (BS-001).",
       "OBSERVATION: the learner's DNS synthesized 64:ff9b::67e0:b6f5 (the NAT64 prefix plus 103.224.182.245 in hex), so their network does DNS64/NAT64. HYPOTHESIS: a mobile connection (also suggested by the 192.168.42.x resolver). Don't assume; ask about data limits before Part 2's large downloads.",
-      "OBSERVATION (step 1 done): example.com's two IPv4 addresses sit in different ranges (104.20.x, 172.66.x), unlike YouTube's neighbors. Step 2's 'server: cloudflare' header will show why (CDN): let them discover it."
+      "OBSERVATION (step 1 done): example.com's two IPv4 addresses sit in different ranges (104.20.x, 172.66.x), unlike YouTube's neighbors. Step 2's 'server: cloudflare' header will show why (CDN): let them discover it.",
+      "OBSERVATION (step 2): curl printed 'IPv6: (none)' although nslookup showed 2 IPv6 addresses. HYPOTHESIS: Windows' resolver drops IPv6 results because the PC has no IPv6 of its own (tethered IPv4 link; the carrier side does NAT64). nslookup asks the DNS server directly.",
+      "OBSERVATION (step 2): Server: cloudflare, cf-cache-status: HIT, Age: 6260, CF-RAY ...-MAD, so Cloudflare's Madrid data center answered from its cache. Schannel printed no certificate details, so get the certificate from the padlock in step 3.",
+      "NEXT: the learner investigates CF-RAY's MAD (airport code → city → latency link), then step 3 in the browser (DevTools Network + padlock certificate)."
     ]
   },
   "competencies": {
-    "http.dns": {
+    "http.request-lifecycle": {
       "level": 1,
+      "confidence": "medium",
+      "class": "critical",
+      "evidence": [
+        {
+          "date": "2026-10-06",
+          "type": "awareness",
+          "ref": "missions/M-001/evidence.md (step 2)",
+          "rung": 0,
+          "note": "Captured the whole chain in their own curl run: DNS resolve, connect (port 443), TLS (schannel/ALPN), GET request, 200 response and headers. Not yet explained in their own words."
+        }
+      ],
+      "weaknesses": ["Not yet explained the request/response chain in their own words (steps 5 and 11)."],
+      "last_practiced": "2026-10-06",
+      "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
+    },
+    "http.dns": {
+      "level": 2,
       "confidence": "medium",
       "class": "critical",
       "evidence": [
@@ -75,14 +97,21 @@
           "ref": "missions/M-001/evidence.md (example.com lookup)",
           "rung": 0,
           "note": "Predicted 2 addresses and no IPv6 at 3/5; got 2 IPv4 + 2 IPv6. IPv4 count right, IPv6 wrong. Ran the corrected lookup unaided."
+        },
+        {
+          "date": "2026-10-06",
+          "type": "prediction (correct)",
+          "ref": "missions/M-001/evidence.md (step 2)",
+          "rung": 0,
+          "note": "Predicted that curl would connect to one of the DNS addresses, over IPv4: exactly right (104.20.23.154). With the step 1 explanation, this meets L2 (explain + predict correctly)."
         }
       ],
-      "weaknesses": ["Explained latency, load balancing and redundancy (the last two with R1). L2 still needs one fully correct prediction: use the spaced review on 2026-10-07."],
+      "weaknesses": ["Doesn't yet know why curl saw no IPv6 when nslookup did (OS resolver vs asking the DNS server directly). Awareness level, revisit with BS-002."],
       "last_practiced": "2026-10-06",
       "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
     }
   },
-  "reliance": { "recent_rungs": [0, 1, 0], "index": 0.33, "ownership_checks": { "passed": 0, "failed": 0 } },
+  "reliance": { "recent_rungs": [0, 1, 0, 0], "index": 0.25, "ownership_checks": { "passed": 0, "failed": 0 } },
   "calibration": { "rated": 3, "confident_and_wrong": 1 },
   "learning_debt": [],
   "blind_spot_backlog": [
