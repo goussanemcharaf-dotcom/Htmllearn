@@ -26,3 +26,16 @@ Nom :    exemple.com
 Addresses:  64:ff9b::67e0:b6f5
           103.224.182.245
 ```
+
+```
+PS C:\Users\user> nslookup example.com
+Serveur :   UnKnown
+Address:  192.168.42.205
+
+Réponse ne faisant pas autorité :
+Nom :    example.com
+Addresses:  2606:4700:10::6814:179a
+          2606:4700:10::ac42:93f3
+          104.20.23.154
+          172.66.147.243
+```
