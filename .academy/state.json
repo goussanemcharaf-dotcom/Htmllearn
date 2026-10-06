@@ -44,14 +44,21 @@
           "ref": "session 1 chat, M-001 step 1 investigate",
           "rung": 0,
           "note": "Unprompted: sites like YouTube spread servers around the world to cut latency, using 'latency' correctly. Missing: why one answer holds several addresses (load balancing, redundancy). Followed up with an R1 question about the shared 64.233.166 prefix."
+        },
+        {
+          "date": "2026-10-06",
+          "type": "explanation",
+          "ref": "session 1 chat, M-001 step 1 investigate",
+          "rung": 1,
+          "note": "After the R1 question: several addresses so the others respond when one can't, because of traffic load. With the earlier answer, that covers latency, load balancing and redundancy."
         }
       ],
-      "weaknesses": ["Knows big sites run many servers worldwide (geo-distribution, latency). Not yet: why a single DNS answer holds several addresses (load balancing, redundancy)."],
+      "weaknesses": ["Explained latency, load balancing and redundancy (reached the last two with R1). L2 still needs one correct prediction: next, example.com (truth on 2026-10-06: 2 IPv4 in different ranges + 2 IPv6, behind Cloudflare)."],
       "last_practiced": "2026-10-06",
       "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
     }
   },
-  "reliance": { "recent_rungs": [0], "index": 0, "ownership_checks": { "passed": 0, "failed": 0 } },
+  "reliance": { "recent_rungs": [0, 1], "index": 0.5, "ownership_checks": { "passed": 0, "failed": 0 } },
   "calibration": { "rated": 1, "confident_and_wrong": 1 },
   "learning_debt": [],
   "blind_spot_backlog": [],
