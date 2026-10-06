@@ -10,6 +10,13 @@
     "step": 1,
     "status": "in-progress",
     "spine_version": 0,
+    "pending_prediction": {
+      "step": 1,
+      "target": "example.com",
+      "said": "2 addresses, no IPv6",
+      "confidence": 3,
+      "truth_checked": "2026-10-06 via DNS-over-HTTPS: 2 IPv4 + 2 IPv6 (behind Cloudflare)"
+    },
     "resolved_predictions": [
       {
         "step": 1,
@@ -22,7 +29,9 @@
     "notes": [
       "OBSERVATION (pre-test): knows the browser asks a DNS server for the site's IP. The connection, TLS, the HTTP request and response, and rendering aren't mentioned yet; the step after 'reaching the site' is a black box.",
       "OBSERVATION (step 1 prediction): the made-up IP 10.80.40.50 is in a private range (10.0.0.0/8). Use it later as a hook for private vs public addresses.",
-      "OBSERVATION (step 1 run): ran nslookup without help, but on youtube.com instead of example.com. Still to cover: the DNS server line (192.168.42.205, a private address on their own network, name UnKnown) and 'Réponse ne faisant pas autorité'. They still need an example.com lookup so the DNS evidence matches step 2's connection."
+      "OBSERVATION (step 1 run): ran nslookup without help, but on youtube.com instead of example.com. Still to cover: the DNS server line (192.168.42.205, a private address on their own network, name UnKnown) and 'Réponse ne faisant pas autorité'. They still need an example.com lookup so the DNS evidence matches step 2's connection.",
+      "OBSERVATION (step 1 rerun): typed exemple.com (the French spelling), which is a different site. Checked 2026-10-06: IPv4-only (103.224.182.245), with an expired HTTPS certificate. Showed the typo-domain card (BS-001).",
+      "OBSERVATION: the learner's DNS synthesized 64:ff9b::67e0:b6f5 (the NAT64 prefix plus 103.224.182.245 in hex), so their network does DNS64/NAT64. HYPOTHESIS: a mobile connection (also suggested by the 192.168.42.x resolver). Don't assume; ask about data limits before Part 2's large downloads."
     ]
   },
   "competencies": {
@@ -59,9 +68,24 @@
     }
   },
   "reliance": { "recent_rungs": [0, 1], "index": 0.5, "ownership_checks": { "passed": 0, "failed": 0 } },
-  "calibration": { "rated": 1, "confident_and_wrong": 1 },
+  "calibration": { "rated": 2, "confident_and_wrong": 1 },
   "learning_debt": [],
-  "blind_spot_backlog": [],
+  "blind_spot_backlog": [
+    {
+      "id": "BS-001",
+      "topic": "Typo domains (typosquatting): one wrong letter leads to someone else's site; same trick hits package names",
+      "class": "essential",
+      "trigger": "M-001 step 1: looked up exemple.com instead of example.com",
+      "status": "card shown; closes when the correct lookup is done (micro-lab)"
+    },
+    {
+      "id": "BS-002",
+      "topic": "NAT64/DNS64 on the learner's network: synthesized 64:ff9b:: IPv6 addresses for IPv4-only sites",
+      "class": "awareness",
+      "trigger": "M-001 step 1: 64:ff9b::67e0:b6f5 for exemple.com",
+      "status": "open (teased in chat; revisit in W02 networking)"
+    }
+  ],
   "missions": { "completed": [], "unfinished": ["M-001"] },
   "bosses": { "passed": [], "attempted": [] },
   "katas": [],

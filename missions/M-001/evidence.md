@@ -15,3 +15,14 @@ Addresses:  2a00:1450:4006:820::200e
 
 PS C:\Users\user>
 ```
+
+```
+PS C:\Users\user> nslookup exemple.com
+Serveur :   UnKnown
+Address:  192.168.42.205
+
+Réponse ne faisant pas autorité :
+Nom :    exemple.com
+Addresses:  64:ff9b::67e0:b6f5
+          103.224.182.245
+```
