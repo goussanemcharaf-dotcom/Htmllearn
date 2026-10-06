@@ -46,7 +46,8 @@
       "OBSERVATION (step 2): Server: cloudflare, cf-cache-status: HIT, Age: 6260, CF-RAY ...-MAD, so Cloudflare's Madrid data center answered from its cache. Schannel printed no certificate details, so get the certificate from the padlock in step 3.",
       "OBSERVATION (step 2 investigate): identified MAD = Madrid (R0) but didn't link it to who answered. Replies are short (possible fatigue), so taught the CDN idea as a worked example: Cloudflare edge in Madrid, cache HIT, Age, addresses answered by the nearest data center. CDN understanding is NOT evidenced yet; check it in the step 5 drawing.",
       "NEXT: offer a break before step 3 (session over 1 h). Step 3 = browser DevTools Network (French labels: Réseau, En-têtes; Timing tab probably 'Minutage') + padlock certificate.",
-      "OBSERVATION (2026-10-06, before step 3): learner chose to continue. example.com's HTML loads /s.js (2 requests: document + script; the icon is data:, so no favicon request). s.js inserts ar/zh/fr/ru/es paragraphs, picks the one matching navigator.languages (a callback to their 'navigator' word) and moves it to the top, plus an inline SVG. So view-source has 1 paragraph but the DOM has 6. That's step 4's source-vs-DOM lesson. Step 3 prediction: how many requests (truth: 2)."
+      "OBSERVATION (2026-10-06, before step 3): learner chose to continue. example.com's HTML loads /s.js (2 requests: document + script; the icon is data:, so no favicon request). s.js inserts ar/zh/fr/ru/es paragraphs, picks the one matching navigator.languages (a callback to their 'navigator' word) and moves it to the top, plus an inline SVG. So view-source has 1 paragraph but the DOM has 6. That's step 4's source-vs-DOM lesson. Step 3 prediction: how many requests (truth: 2).",
+      "OBSERVATION (step 3 attempt): skipped the prediction and answered '7 requests because there are 7 different durations' after opening the Timing tab. No confidence given, so no calibration entry. Still missing: the request list names, the status code and the TTFB value. Asked R1: what do the duration names remind you of?"
     ]
   },
   "competencies": {
@@ -63,7 +64,10 @@
           "note": "Captured the whole chain in their own curl run: DNS resolve, connect (port 443), TLS (schannel/ALPN), GET request, 200 response and headers. Not yet explained in their own words."
         }
       ],
-      "weaknesses": ["Not yet explained the request/response chain in their own words (steps 5 and 11)."],
+      "weaknesses": [
+        "Not yet explained the request/response chain in their own words (steps 5 and 11).",
+        "MISCONCEPTION (step 3): read the Timing tab's 7 durations as 7 separate requests; they're the stages of ONE request. Being addressed with an R1 question: do the duration names match today's steps (DNS, connection, TLS...)?"
+      ],
       "last_practiced": "2026-10-06",
       "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
     },
