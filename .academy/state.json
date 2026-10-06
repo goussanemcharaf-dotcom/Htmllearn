@@ -1,0 +1,20 @@
+{
+  "schema": "academy-state/7",
+  "updated": "2026-10-06",
+  "game": { "enabled": true, "trial": true, "xp": 0, "rank": "Web Explorer", "badges": [] },
+  "speed_default": "learn",
+  "workspace": "split",
+  "current": { "mission": "M-001", "part": 1, "step": 0, "status": "in-progress", "spine_version": 0 },
+  "competencies": {},
+  "reliance": { "recent_rungs": [], "index": null, "ownership_checks": { "passed": 0, "failed": 0 } },
+  "calibration": { "rated": 0, "confident_and_wrong": 0 },
+  "learning_debt": [],
+  "blind_spot_backlog": [],
+  "missions": { "completed": [], "unfinished": ["M-001"] },
+  "bosses": { "passed": [], "attempted": [] },
+  "katas": [],
+  "next_mission": {
+    "id": "M-001",
+    "why": "Total beginner: Mission 001 builds the URL-to-pixels model that every later world builds on."
+  }
+}

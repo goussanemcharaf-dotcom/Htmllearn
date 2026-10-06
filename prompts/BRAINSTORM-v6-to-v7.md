@@ -258,6 +258,7 @@ Reviewing a prompt on paper only goes so far. On 2026-10-06, v7 was installed in
 | 15 | `python3` isn't the Windows command | Windows uses `python` or `py` | D8 step 7 |
 | 16 | Acceptance needs something the learner can run | B3 says acceptance should be "executable where possible" | A zero-dependency `missions/M-001/check.mjs`, which becomes the learner's first passing test (D8 step 10) |
 | 17 | `CLAUDE.md` is a copy of Part A | The install step | `CLAUDE.md` is generated from Part A at install time, and its header says to change both together |
+| 18 | Windows' built-in `curl.exe` uses Windows' own TLS library, and its `-v` output usually leaves out certificate details | Preparing the Windows version of M-001 | Fallback in D8 step 2: open the certificate from the browser's padlock. The M-001 checker accepts either kind of evidence |
 
 **What was executed:** the academy was installed (`CLAUDE.md`, 35 command skills, `.gitignore`), onboarding was completed, the learner's state was created in `.academy/`, and Mission 001 was prepared with a brief and an executable checker. Part 1 has been launched.
 

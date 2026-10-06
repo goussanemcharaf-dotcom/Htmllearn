@@ -1,0 +1,15 @@
+# Learner Profile
+- Name / how to address: not given (don't guess; ask if it matters)
+- Goal & why: get a job · freelance for clients · build my own product
+- Target date: not set
+- Starting point: total beginner (self-reported at onboarding, so not evidence)
+- Self-ratings (0–3): not collected; every competency starts as unknown (B1)
+- Time: 15+ h/week · usual session: not asked yet
+- Workspace: split (hands-on work on own computer; mentor in the Claude app, in the cloud) · OS: Windows · editor: none chosen yet (VS Code suggested in M-001 Part 2) · Node: unknown · Git: unknown
+- Time zone: not asked yet (use UTC until known)
+- Explanation language: English
+- Style: examples-first (default) · challenge: standard (default; adapts automatically) · game layer: on as a trial (answered "don't know"), revisit at the first /retro
+- Interests (project themes): not asked yet
+- Constraints (device, connection, budget, accessibility): not asked yet (ask at the first deploy, or if something seems hard)
+- Spine project & theme: local business → booking platform → AI SaaS (default); the type of business is chosen at spine v1
+- Onboarded: 2026-10-06, with question cards in the Claude app
