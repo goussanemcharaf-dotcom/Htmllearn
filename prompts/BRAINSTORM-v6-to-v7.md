@@ -1,13 +1,14 @@
 # Brainstorm: Web Engineer Master Academy v6 → v7
 
 **Input:** v6.0 (`prompts/archive/WEB-ENGINEER-MASTER-ACADEMY-v6.md`)
-**Output:** v7.0 (`prompts/WEB-ENGINEER-MASTER-ACADEMY-v7.md`)
+**Output:** v7.1 (`prompts/WEB-ENGINEER-MASTER-ACADEMY-v7.md`)
 
-**Method:** three passes, as requested.
+**Method:** three passes, as requested, then a fourth once v7 was actually run.
 
 1. **Brainstorm.** What v6 gets right, how it would behave when actually run, and every improvement idea worth considering.
 2. **Refine.** Decide what goes into v7, what gets rejected, and why.
 3. **Brainstorm again.** Attack the v7 draft, then fix what breaks.
+4. **Brainstorm while executing.** Install v7, run it with a real learner, and fix what reality breaks. The result is v7.1.
 
 ---
 
@@ -234,6 +235,34 @@ The v7 draft was attacked from the angle of the learner, of Claude, and of reali
 
 ---
 
+## Round 4: Brainstorm while executing (v7 → v7.1)
+
+Reviewing a prompt on paper only goes so far. On 2026-10-06, v7 was installed in this repo and run for real: onboarding through question cards in the Claude app, checks of the session's machine, and preparation of Mission 001. Each finding below lists the evidence that surfaced it.
+
+| # | Found while executing | Evidence | Change in v7.1 |
+|---|---|---|---|
+| 1 | `/debug` is a built-in Claude Code command, and a project skill with the same name *replaces* it | Claude Code docs: the built-in command list and the rules for skill names | Academy command renamed to `/bughunt` (A18, B6, D7) |
+| 2 | Skill descriptions cost context on every turn, unless `disable-model-invocation: true` is set | Claude Code skills docs | 35 thin command skills with that flag. They cost no context, and the master file stays the single source of truth (D0, D7) |
+| 3 | The learner's machine is not the session's machine | This session runs in a cloud container; the learner works on a Windows computer | The profile records a `workspace`: `same-machine` · `split` · `app-only` · `chat-only` (A5, B1) |
+| 4 | In `split` and `app-only` modes, the learner can't type into the session's files | The Claude app can view files but not edit them | Scribe rule (save the learner's code verbatim, bugs included), dictated commands, and outputs pasted into chat as evidence (A5) |
+| 5 | Version checks are wrong in the cloud | `node -v` here reports the container's Node 22, not the learner's PC | Check versions yourself only on the learner's own machine (B1) |
+| 6 | The cloud container is temporary | The session environment | Commit and push state at every checkpoint in cloud modes (A16) |
+| 7 | `dig` and `nslookup` aren't available everywhere | Both missing in the container | A DNS-over-HTTPS request through curl works anywhere curl does, and it shows the TTL (D8 step 1) |
+| 8 | `curl -v` through a proxy shows the proxy, not the site | Container output: `CONNECT example.com:443` sent to `127.0.0.1` | Explained as an observation in D8 step 2 (proxies are 🟠 in W02) |
+| 9 | One name has several addresses, and their order varies | DNS-over-HTTPS returned 2 A records (TTL 12 s), and two lookups listed them in different orders | Becomes a question in D8 step 1 (load balancing) |
+| 10 | The academy's own dates had a time-zone bug | The container clock is UTC, but "due today" depends on the learner's zone | The profile stores the time zone, with UTC used until it's known (A16, D2). W31 applies to the academy itself |
+| 11 | Self-ratings aren't evidence | A9 contradicts B1's self-ratings | Self-ratings stay in the profile, and every competency starts as unknown (B1) |
+| 12 | Typing long answers in the app is slow | The onboarding run | Tap-to-answer question cards (4 questions or fewer each), asking only what changes the next step (B1) |
+| 13 | "Don't know" is a real answer | The game-layer question | When the learner is unsure, use the gentler default as a trial and revisit it at the first retro (B1) |
+| 14 | The first sitting would be onboarding plus a 90-minute mission | Time budget | M-001 is split into Part 1 (no installs) and Part 2 (setup and the first page) (D8) |
+| 15 | `python3` isn't the Windows command | Windows uses `python` or `py` | D8 step 7 |
+| 16 | Acceptance needs something the learner can run | B3 says acceptance should be "executable where possible" | A zero-dependency `missions/M-001/check.mjs`, which becomes the learner's first passing test (D8 step 10) |
+| 17 | `CLAUDE.md` is a copy of Part A | The install step | `CLAUDE.md` is generated from Part A at install time, and its header says to change both together |
+
+**What was executed:** the academy was installed (`CLAUDE.md`, 35 command skills, `.gitignore`), onboarding was completed, the learner's state was created in `.academy/`, and Mission 001 was prepared with a brief and an executable checker. Part 1 has been launched.
+
+---
+
 ## v6 → v7: where every v6 section went
 
 Nothing was dropped silently. Every v6 section maps to a place in v7:
@@ -304,12 +333,12 @@ Nothing was dropped silently. Every v6 section maps to a place in v7:
 
 ---
 
-## Open questions only you can answer
+## Open questions: answered at onboarding (2026-10-06)
 
-v7 uses sensible defaults for all of these. Answering them during `/start` personalizes it:
-
-1. **Explanation language.** English, or another language with technical terms kept in English?
-2. **Spine project theme.** The default is a local business growing into a booking SaaS. Do you have a real business, idea or interest to build around instead?
-3. **Time budget.** Hours per week and typical session length, which decide how big missions are.
-4. **Game layer.** XP, ranks and bosses: on or off?
-5. **Install now?** Option 1 (Part A as `CLAUDE.md`) turns this repo into a working academy right away.
+| Question | Answer |
+|---|---|
+| Explanation language | English |
+| Spine project theme | Local business → booking platform → AI SaaS (the type of business is chosen at spine v1) |
+| Time budget | 15+ hours a week |
+| Game layer | "Don't know", so it's on as a trial and will be revisited at the first retro |
+| Install now? | Yes: Option 2 (`CLAUDE.md` plus command skills) |

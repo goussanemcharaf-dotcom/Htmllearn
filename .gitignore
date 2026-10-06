@@ -1,0 +1,12 @@
+# Secrets: never commit them (A14). Commit a .env.example with fake values instead.
+.env
+.env.*
+!.env.example
+
+# Dependencies and build output
+node_modules/
+dist/
+
+# OS clutter
+.DS_Store
+Thumbs.db
