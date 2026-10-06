@@ -45,7 +45,8 @@
       "OBSERVATION (step 2): curl printed 'IPv6: (none)' although nslookup showed 2 IPv6 addresses. HYPOTHESIS: Windows' resolver drops IPv6 results because the PC has no IPv6 of its own (tethered IPv4 link; the carrier side does NAT64). nslookup asks the DNS server directly.",
       "OBSERVATION (step 2): Server: cloudflare, cf-cache-status: HIT, Age: 6260, CF-RAY ...-MAD, so Cloudflare's Madrid data center answered from its cache. Schannel printed no certificate details, so get the certificate from the padlock in step 3.",
       "OBSERVATION (step 2 investigate): identified MAD = Madrid (R0) but didn't link it to who answered. Replies are short (possible fatigue), so taught the CDN idea as a worked example: Cloudflare edge in Madrid, cache HIT, Age, addresses answered by the nearest data center. CDN understanding is NOT evidenced yet; check it in the step 5 drawing.",
-      "NEXT: offer a break before step 3 (session over 1 h). Step 3 = browser DevTools Network (French labels: Réseau, En-têtes; Timing tab probably 'Minutage') + padlock certificate."
+      "NEXT: offer a break before step 3 (session over 1 h). Step 3 = browser DevTools Network (French labels: Réseau, En-têtes; Timing tab probably 'Minutage') + padlock certificate.",
+      "OBSERVATION (2026-10-06, before step 3): learner chose to continue. example.com's HTML loads /s.js (2 requests: document + script; the icon is data:, so no favicon request). s.js inserts ar/zh/fr/ru/es paragraphs, picks the one matching navigator.languages (a callback to their 'navigator' word) and moves it to the top, plus an inline SVG. So view-source has 1 paragraph but the DOM has 6. That's step 4's source-vs-DOM lesson. Step 3 prediction: how many requests (truth: 2)."
     ]
   },
   "competencies": {
