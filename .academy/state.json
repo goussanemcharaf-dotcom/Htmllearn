@@ -10,13 +10,19 @@
     "step": 1,
     "status": "in-progress",
     "spine_version": 0,
+    "pending_prediction": {
+      "step": 1,
+      "said": "nslookup example.com returns one IP address, shaped like 10.80.40.50",
+      "confidence": 5
+    },
     "notes": [
-      "OBSERVATION (pre-test): knows the browser asks a DNS server for the site's IP. The connection, TLS, the HTTP request and response, and rendering aren't mentioned yet; the step after 'reaching the site' is a black box."
+      "OBSERVATION (pre-test): knows the browser asks a DNS server for the site's IP. The connection, TLS, the HTTP request and response, and rendering aren't mentioned yet; the step after 'reaching the site' is a black box.",
+      "OBSERVATION (step 1 prediction): the made-up IP 10.80.40.50 is in a private range (10.0.0.0/8). Use it later as a hook for private vs public addresses."
     ]
   },
   "competencies": {},
   "reliance": { "recent_rungs": [], "index": null, "ownership_checks": { "passed": 0, "failed": 0 } },
-  "calibration": { "rated": 0, "confident_and_wrong": 0 },
+  "calibration": { "rated": 1, "confident_and_wrong": 0 },
   "learning_debt": [],
   "blind_spot_backlog": [],
   "missions": { "completed": [], "unfinished": ["M-001"] },
