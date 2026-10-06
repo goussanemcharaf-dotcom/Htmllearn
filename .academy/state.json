@@ -37,9 +37,16 @@
           "ref": "missions/M-001/before.md; missions/M-001/evidence.md (step 1)",
           "rung": 0,
           "note": "Pre-test names DNS as the name-to-IP lookup. Ran nslookup unaided (on youtube.com). Predicted 1 address at confidence 5; got 4 IPv4 + 1 IPv6."
+        },
+        {
+          "date": "2026-10-06",
+          "type": "explanation (partial)",
+          "ref": "session 1 chat, M-001 step 1 investigate",
+          "rung": 0,
+          "note": "Unprompted: sites like YouTube spread servers around the world to cut latency, using 'latency' correctly. Missing: why one answer holds several addresses (load balancing, redundancy). Followed up with an R1 question about the shared 64.233.166 prefix."
         }
       ],
-      "weaknesses": ["HYPOTHESIS: believes one name = one address (one server); being probed in step 1"],
+      "weaknesses": ["Knows big sites run many servers worldwide (geo-distribution, latency). Not yet: why a single DNS answer holds several addresses (load balancing, redundancy)."],
       "last_practiced": "2026-10-06",
       "review": { "next": "2026-10-07", "interval_days": 1, "fails_in_a_row": 0 }
     }
