@@ -4,7 +4,16 @@
   "game": { "enabled": true, "trial": true, "xp": 0, "rank": "Web Explorer", "badges": [] },
   "speed_default": "learn",
   "workspace": "split",
-  "current": { "mission": "M-001", "part": 1, "step": 0, "status": "in-progress", "spine_version": 0 },
+  "current": {
+    "mission": "M-001",
+    "part": 1,
+    "step": 1,
+    "status": "in-progress",
+    "spine_version": 0,
+    "notes": [
+      "OBSERVATION (pre-test): knows the browser asks a DNS server for the site's IP. The connection, TLS, the HTTP request and response, and rendering aren't mentioned yet; the step after 'reaching the site' is a black box."
+    ]
+  },
   "competencies": {},
   "reliance": { "recent_rungs": [], "index": null, "ownership_checks": { "passed": 0, "failed": 0 } },
   "calibration": { "rated": 0, "confident_and_wrong": 0 },
